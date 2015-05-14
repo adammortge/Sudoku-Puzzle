@@ -18,5 +18,16 @@ public class SudokuGenerator {
     public static void main(String[] args) {
        
     }
+
+    public class MouseActions implements MouseListener{
+         
+            
     
+    
+    
+    
+    
+    
+    
+    }
 }
