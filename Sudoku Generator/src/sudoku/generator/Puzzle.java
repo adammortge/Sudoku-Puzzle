@@ -15,30 +15,31 @@ package sudoku.generator;
 
 public class Puzzle 
 {
-    private [][] int solvedPuzzle;
-    private [][] int origPuzzle;
+    private int [][] solvedPuzzle;
+    private int [][] origPuzzle;
     int puzzleSize;
     
-    /* Precondition: input contains only ints from 0 to 9 inclusive. 0 means an empty cell.
-    */
+    /* Precondition: input contains only ints from 0 to 9 inclusive. 0 means an empty cell.*/
     
     public Puzzle (int [][] input, boolean solved)
-    {
-        
+    { 
         solvedPuzzle = input;
         origPuzzle = input;
         puzzleSize = input.length;
         if (!solved)
-            solve();        
+        {
+            solve(0,0); 
+        }
     }
         
     private void solve(int row, int col)
     {
-        if (row > 8)
-            break;
+        if (row < puzzleSize)
+        {
+            
         if (solvedPuzzle[row][col] != 0)
         {
-            solve (row+1,col+1);
+            next(row,col);
         }
         
         else
@@ -47,10 +48,12 @@ public class Puzzle
             {
                 if (checkRow(row, x) && checkCol(col,x) && checkBox(row,col,x))
                 {
-                    next(row,col)
+                    solvedPuzzle[row][col] = x;
+                    next(row,col);
                 }
             }
-            model[row][col] = 0;
+            solvedPuzzle[row][col] = 0;
+        }
         }
     }
     
@@ -100,6 +103,12 @@ public class Puzzle
         }
         return true;
     }
-    
+    public int [][] getOriginal ()
+    {
+            return origPuzzle;
+    }
+    public int [][] getSolved ()
+    {
+            return solvedPuzzle;
     }
 }
